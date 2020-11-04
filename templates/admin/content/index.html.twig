@@ -1,0 +1,47 @@
+{% extends 'admin/layout.html.twig' %}
+
+{% block main %}
+    <h1>{{ title }}</h1>
+
+    <div class="well">
+        {% for text in cover_text %}
+            <p class="m-b-0">{{ text.text }}</p>
+            <a href="/admin/edit/cover-text/{{ text.id }}" class="btn btn-sm btn-default">
+                <i class="fa fa-eye" aria-hidden="true"></i> edit
+            </a>
+        {% endfor %}
+    </div>
+
+    <h1>{{ title2 }}</h1>
+
+    <div class="well">
+        {% for text in description_text %}
+            <h2>{{ text.title }}</h2>
+            <p class="m-b-0">{{ text.text }}</p>
+            <a href="/admin/edit/cover-text/{{ text.id }}" class="btn btn-sm btn-default">
+                <i class="fa fa-eye" aria-hidden="true"></i> edit
+            </a>
+        {% endfor %}
+    </div>
+
+    <h1>{{ title3 }}</h1>
+
+    <div class="well">
+        {% for text in game_text %}
+            <h2>{{ text.title }}</h2>
+            <p class="m-b-0">{{ text.text }}</p>
+            <a href="/admin/edit/cover-text/{{ text.id }}" class="btn btn-sm btn-default">
+                <i class="fa fa-eye" aria-hidden="true"></i> edit
+            </a>
+        {% endfor %}
+    </div>
+    
+{% endblock %}
+
+{% block sidebar %}
+    <div class="section actions">
+        <a href="{{ path('admin_post_new') }}" class="btn btn-lg btn-block btn-success">
+            <i class="fa fa-plus" aria-hidden="true"></i> {{ 'action.create_post'|trans }}
+        </a>
+    </div>
+{% endblock %}

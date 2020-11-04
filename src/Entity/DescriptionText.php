@@ -2,14 +2,14 @@
 
 namespace App\Entity;
 
-use App\Repository\PostRepository;
+use App\Repository\DescriptionTextRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * @ORM\Entity(repositoryClass=PostRepository::class)
+ * @ORM\Entity(repositoryClass=DescriptionTextRepository::class)
  */
-class Post
+class DescriptionText
 {
     /**
      * @ORM\Id
@@ -25,14 +25,10 @@ class Post
     private $title;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank()
+     * @ORM\Column(type="string", length=700)
      */
-    private $image;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Category", inversedBy="post")
-     */
-    private $category;
+    private $text;
 
     public function getId(): ?int
     {
@@ -43,7 +39,7 @@ class Post
     {
         return $this->title;
     }
-    
+
     public function setTitle(string $title): self
     {
         $this->title = $title;
@@ -51,26 +47,14 @@ class Post
         return $this;
     }
 
-    public function getImage(): ?string
+    public function getText(): ?string
     {
-        return $this->image;
+        return $this->text;
     }
 
-    public function setImage(string $image): self
+    public function setText(string $text): self
     {
-        $this->image = $image;
-
-        return $this;
-    }
-
-    public function getCategory(): ?Category
-    {
-        return $this->category;
-    }
-
-    public function setCategory(?Category $category): self
-    {
-        $this->category = $category;
+        $this->text = $text;
 
         return $this;
     }

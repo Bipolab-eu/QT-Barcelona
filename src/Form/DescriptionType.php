@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use App\Entity\CoverText;
+use App\Entity\DescriptionText;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
@@ -11,11 +12,12 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class PostType extends AbstractType
+class DescriptionType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder
+		$builder
+			->add('title')
             ->add('text', TextareaType::class)
             ->add(
                 'save', SubmitType::class, [
@@ -29,7 +31,7 @@ class PostType extends AbstractType
     {
         $resolver->setDefaults(
             [
-            'data_class' => CoverText::class,
+            'data_class' => null,
             ]
         );
     }

@@ -2,25 +2,25 @@
 
 namespace App\Repository;
 
-use App\Entity\Category;
+use App\Entity\CoverText;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @method Category|null find($id, $lockMode = null, $lockVersion = null)
- * @method Category|null findOneBy(array $criteria, array $orderBy = null)
- * @method Category[]    findAll()
- * @method Category[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method CoverText|null find($id, $lockMode = null, $lockVersion = null)
+ * @method CoverText|null findOneBy(array $criteria, array $orderBy = null)
+ * @method CoverText[]    findAll()
+ * @method CoverText[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class CategoryRepository extends ServiceEntityRepository
+class CoverTextRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, Category::class);
+        parent::__construct($registry, CoverText::class);
     }
 
     // /**
-    //  * @return Category[] Returns an array of Category objects
+    //  * @return CoverText[] Returns an array of CoverText objects
     //  */
     /*
     public function findByExampleField($value)
@@ -37,7 +37,7 @@ class CategoryRepository extends ServiceEntityRepository
     */
 
     /*
-    public function findOneBySomeField($value): ?Category
+    public function findOneBySomeField($value): ?CoverText
     {
         return $this->createQueryBuilder('c')
             ->andWhere('c.exampleField = :val')
