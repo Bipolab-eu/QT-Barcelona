@@ -6,6 +6,7 @@ use App\Entity\CoverText;
 use App\Entity\DescriptionText;
 use App\Entity\GameText;
 use App\Form\DescriptionType;
+use App\Form\GameType;
 use App\Form\PostType;
 use App\Repository\GameTextRepository;
 use App\Repository\CoverTextRepository;
@@ -45,16 +46,8 @@ class AdminController extends AbstractController
         );
     }
 
-    // public function getGameText(): Response
-    // {
-    //     return $this->render('game_text/index.html.twig', [
-    //         'controller_name' => 'GameTextController',
-    //         ]
-    //     );
-    // }
-
     /**
-     * @Route("/create/cover-text", name="create")
+     * @Route("/create/cover-text", name="create_cover_text")
      * @param Request $request
      * @return Response
      */
@@ -84,7 +77,7 @@ class AdminController extends AbstractController
     }
 
     /**
-     * @Route("/create/description-text", name="create")
+     * @Route("/create/description-text", name="create_description_text")
      * @param Request $request
      * @return Response
      */
@@ -114,7 +107,7 @@ class AdminController extends AbstractController
     }
 
     /**
-     * @Route("/create/game-text", name="create")
+     * @Route("/create/game-text", name="create_game_text")
      * @param Request $request
      * @return Response
      */
@@ -122,7 +115,7 @@ class AdminController extends AbstractController
     {
         $gameText = new GameText();
 
-        $form = $this->createForm(DescriptionType::class, $gameText);
+        $form = $this->createForm(GameType::class, $gameText);
 
         $form->handleRequest($request);
 
@@ -137,26 +130,11 @@ class AdminController extends AbstractController
         }
         
         return $this->render(
-            'description_text/create.html.twig', [
+            'game_text/create.html.twig', [
             'form' => $form->createView()
             ]
         );
     }
-
-    // /**
-    //  * @Route("/show/{id}", name="show")
-    //  * @param               Text $text
-    //  * @return              Response
-    //  */
-    // public function show(Text $text)
-    // {
-    //     // create the show view
-    //     return $this->render(
-    //         'post/show.html.twig', [
-    //         'post' => $post
-    //         ]
-    //     );
-    // }
 
     /**
      * Displays a form to edit an existing Post entity.
@@ -164,7 +142,7 @@ class AdminController extends AbstractController
      * @Route("/edit/cover-text/{id<\d+>}", methods="GET|POST", name="admin_cover_text_edit")
      * @IsGranted("ROLE_ADMIN")
      */
-    public function edit(Request $request, CoverText $coverText): Response
+    public function editCoverText(Request $request, CoverText $coverText): Response
     {
         $form = $this->createForm(PostType::class, $coverText);
         $form->handleRequest($request);
@@ -180,22 +158,110 @@ class AdminController extends AbstractController
         return $this->render('admin/content/edit.html.twig', [
             'cover_text' => $coverText,
             'form' => $form->createView(),
-            'title' => 'Text de capçalera'
+            'title' => 'Text de capçalera',
+            'id' => $coverText->id
             ]
         );
     }
 
-    // /**
-    //  * @Route("/delete/{id}", name="delete")
-    //  */
-    // public function remove(Post $post)
-    // {
-    //     $em = $this->getDoctrine()->getManager();
+    /**
+     * Displays a form to edit an existing Post entity.
+     *
+     * @Route("/edit/description-text/{id<\d+>}", methods="GET|POST", name="admin_description_text_edit")
+     * @IsGranted("ROLE_ADMIN")
+     */
+    public function editDescriptionText(Request $request, DescriptionText $descriptionText): Response
+    {
+        $form = $this->createForm(DescriptionType::class, $descriptionText);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->getDoctrine()->getManager()->flush();
+
+            $this->addFlash('success', 'post.updated_successfully');
+
+            return $this->redirect('/admin');
+        }
+
+        return $this->render('admin/content/edit.html.twig', [
+            'description_text' => $descriptionText,
+            'form' => $form->createView(),
+            'title' => 'Text informatiu',
+            'id' => $descriptionText->id
+            ]
+        );
+    }
+
+    /**
+     * Displays a form to edit an existing Post entity.
+     *
+     * @Route("/edit/game-text/{id<\d+>}", methods="GET|POST", name="admin_game_text_edit")
+     * @IsGranted("ROLE_ADMIN")
+     */
+    public function editGameText(Request $request, GameText $gameText): Response
+    {
+        $form = $this->createForm(GameType::class, $gameText);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->getDoctrine()->getManager()->flush();
+
+            $this->addFlash('success', 'post.updated_successfully');
+
+            return $this->redirect('/admin');
+        }
+
+        return $this->render('admin/content/edit.html.twig', [
+            'game_text' => $gameText,
+            'form' => $form->createView(),
+            'title' => 'Instruccions de el joc',
+            'id' => $gameText->id
+            ]
+        );
+    }
+
+    /**
+     * @Route("/delete/cover-text/{id}", methods="POST", name="delete_cover_text")
+     * @IsGranted("ROLE_ADMIN")
+     */
+    public function removeCoverText(CoverText $coverText)
+    {
+        $em = $this->getDoctrine()->getManager();
         
-    //     $em->remove($post);
-    //     $em->flush();
-    //     $this->addFlash('success', 'Post was removed');
+        $em->remove($coverText);
+        $em->flush();
+        $this->addFlash('success', 'Post was removed');
         
-    //     return $this->redirect($this->generateUrl('post.index'));
-    // }
+        return $this->redirect("/admin");
+    }
+
+    /**
+     * @Route("/delete/description-text/{id}", methods="POST", name="delete_description_text")
+     * @IsGranted("ROLE_ADMIN")
+     */
+    public function removeDescriptionText(DescriptionText $descriptionText)
+    {
+        $em = $this->getDoctrine()->getManager();
+        
+        $em->remove($descriptionText);
+        $em->flush();
+        $this->addFlash('success', 'Post was removed');
+        
+        return $this->redirect("/admin");
+    }
+
+    /**
+     * @Route("/delete/game-text/{id}", methods="POST", name="delete_game_text")
+     * @IsGranted("ROLE_ADMIN")
+     */
+    public function removeGameText(GameText $gameText)
+    {
+        $em = $this->getDoctrine()->getManager();
+        
+        $em->remove($gameText);
+        $em->flush();
+        $this->addFlash('success', 'Post was removed');
+        
+        return $this->redirect("/admin");
+    }
 }

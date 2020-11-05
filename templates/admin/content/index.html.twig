@@ -1,13 +1,15 @@
 {% extends 'admin/layout.html.twig' %}
 
+{% block body_id 'admin_index' %}
+
 {% block main %}
     <h1>{{ title }}</h1>
 
     <div class="well">
         {% for text in cover_text %}
             <p class="m-b-0">{{ text.text }}</p>
-            <a href="/admin/edit/cover-text/{{ text.id }}" class="btn btn-sm btn-default">
-                <i class="fa fa-eye" aria-hidden="true"></i> edit
+            <a href="/admin/edit/cover-text/{{ text.id }}" class="btn btn-sm btn-primary">
+                <i class="fa fa-eye" aria-hidden="true"></i> editar
             </a>
         {% endfor %}
     </div>
@@ -18,9 +20,11 @@
         {% for text in description_text %}
             <h2>{{ text.title }}</h2>
             <p class="m-b-0">{{ text.text }}</p>
-            <a href="/admin/edit/cover-text/{{ text.id }}" class="btn btn-sm btn-default">
-                <i class="fa fa-eye" aria-hidden="true"></i> edit
-            </a>
+            <div class="item-actions">
+                <a href="/admin/edit/description-text/{{ text.id }}" class="btn btn-sm btn-primary">
+                    <i class="fa fa-eye" aria-hidden="true"></i> editar
+                </a>
+            </div>
         {% endfor %}
     </div>
 
@@ -30,8 +34,8 @@
         {% for text in game_text %}
             <h2>{{ text.title }}</h2>
             <p class="m-b-0">{{ text.text }}</p>
-            <a href="/admin/edit/cover-text/{{ text.id }}" class="btn btn-sm btn-default">
-                <i class="fa fa-eye" aria-hidden="true"></i> edit
+            <a href="/admin/edit/game-text/{{ text.id }}" class="btn btn-sm btn-primary">
+                <i class="fa fa-eye" aria-hidden="true"></i> editar
             </a>
         {% endfor %}
     </div>
@@ -39,9 +43,23 @@
 {% endblock %}
 
 {% block sidebar %}
+    {% if cover_text == [] %}
+        <div class="section actions">
+            <a href="/admin/create/cover-text" class="btn btn-lg btn-block btn-success">
+                <i class="fa fa-plus" aria-hidden="true"></i> crear text de portada
+            </a>
+        </div>
+    {% endif %}
+    {% if description_text == [] %}
+        <div class="section actions">
+            <a href="/admin/create/description-text" class="btn btn-lg btn-block btn-success">
+                <i class="fa fa-plus" aria-hidden="true"></i> crear text informatiu
+            </a>
+        </div>
+    {% endif %}
     <div class="section actions">
-        <a href="{{ path('admin_post_new') }}" class="btn btn-lg btn-block btn-success">
-            <i class="fa fa-plus" aria-hidden="true"></i> {{ 'action.create_post'|trans }}
+        <a href="/admin/create/game-text" class="btn btn-lg btn-block btn-success">
+            <i class="fa fa-plus" aria-hidden="true"></i> crear instrucció de joc
         </a>
     </div>
 {% endblock %}
