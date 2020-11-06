@@ -3,40 +3,41 @@
 {% block body_id 'admin_index' %}
 
 {% block main %}
-    <h1>{{ title }}</h1>
+    <h1><b>{{ title }}</b></h1>
 
-    <div class="well">
+    <div class="well data">
         {% for text in cover_text %}
             <p class="m-b-0">{{ text.text }}</p>
-            <a href="/admin/edit/cover-text/{{ text.id }}" class="btn btn-sm btn-primary">
-                <i class="fa fa-eye" aria-hidden="true"></i> editar
+            <a href="/admin/edit/cover-text/{{ text.id }}" class="btn btn-sm btn-primary button">
+                <i class="fa fa-eye" aria-hidden="true"></i> Editar
             </a>
         {% endfor %}
     </div>
 
-    <h1>{{ title2 }}</h1>
+    <h1><b>{{ title2 }}</b></h1>
 
-    <div class="well">
+    <div class="well data">
         {% for text in description_text %}
             <h2>{{ text.title }}</h2>
             <p class="m-b-0">{{ text.text }}</p>
             <div class="item-actions">
-                <a href="/admin/edit/description-text/{{ text.id }}" class="btn btn-sm btn-primary">
-                    <i class="fa fa-eye" aria-hidden="true"></i> editar
+                <a href="/admin/edit/description-text/{{ text.id }}" class="btn btn-sm btn-primary button">
+                    <i class="fa fa-eye" aria-hidden="true"></i> Editar
                 </a>
             </div>
         {% endfor %}
     </div>
 
-    <h1>{{ title3 }}</h1>
+    <h1><b>{{ title3 }}</b></h1>
 
-    <div class="well">
-        {% for text in game_text %}
-            <h2>{{ text.title }}</h2>
+    <div class="well data" id="game-text">
+        {% for key, text in game_text %}
+            <h2 class="game-title">Joc {{ key + 1 }}: {{ text.title }}</h2>
             <p class="m-b-0">{{ text.text }}</p>
-            <a href="/admin/edit/game-text/{{ text.id }}" class="btn btn-sm btn-primary">
-                <i class="fa fa-eye" aria-hidden="true"></i> editar
+            <a href="/admin/edit/game-text/{{ text.id }}" class="btn btn-sm btn-primary button">
+                <i class="fa fa-eye" aria-hidden="true"></i> Editar
             </a>
+            <hr>
         {% endfor %}
     </div>
     
@@ -45,21 +46,21 @@
 {% block sidebar %}
     {% if cover_text == [] %}
         <div class="section actions">
-            <a href="/admin/create/cover-text" class="btn btn-lg btn-block btn-success">
-                <i class="fa fa-plus" aria-hidden="true"></i> crear text de portada
+            <a href="/admin/create/cover-text" class="btn btn-lg btn-block btn-success button">
+                <i class="fa fa-plus" aria-hidden="true"></i> Crear text de portada
             </a>
         </div>
     {% endif %}
     {% if description_text == [] %}
         <div class="section actions">
-            <a href="/admin/create/description-text" class="btn btn-lg btn-block btn-success">
-                <i class="fa fa-plus" aria-hidden="true"></i> crear text informatiu
+            <a href="/admin/create/description-text" class="btn btn-lg btn-block btn-success button">
+                <i class="fa fa-plus" aria-hidden="true"></i> Crear text informatiu
             </a>
         </div>
     {% endif %}
     <div class="section actions">
-        <a href="/admin/create/game-text" class="btn btn-lg btn-block btn-success">
-            <i class="fa fa-plus" aria-hidden="true"></i> crear instrucció de joc
+        <a href="/admin/create/game-text" class="btn btn-lg btn-block btn-success button">
+            <i class="fa fa-plus" aria-hidden="true"></i> Crear instrucció de joc
         </a>
     </div>
 {% endblock %}

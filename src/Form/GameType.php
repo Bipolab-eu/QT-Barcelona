@@ -23,7 +23,7 @@ class GameType extends AbstractType
             ->add(
                 'save', SubmitType::class, [
                 'attr' => [
-                'class' => 'btn btn-primary float-right'
+                'class' => 'btn btn-primary float-left button'
                 ]
                 ]
             );

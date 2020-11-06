@@ -1,8 +1,8 @@
 {% extends('base.html.twig') %}
 
 {% block header %}
-    <nav class="navbar navbar-expand-lg navbar-light bg-warning">
-      <a class="navbar-brand" href="{{ path('home') }}">qüestió <br> de temps</a>
+    <nav class="navbar navbar-expand-lg navbar-light" id="navbar">
+      <a class="navbar-brand" id="logo" href="{{ path('home') }}">qüestió <br> de temps</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -10,13 +10,13 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav mr-auto">
               <li class="nav-item">
-                  <button type="button" class="btn btn-light">
+                  <button type="button" class="btn btn-light btn-md button">
                       <a class="nav-link" href="/admin">Home</a>
                   </button>
               </li>
               {% if is_granted('IS_AUTHENTICATED_FULLY') %}
                   <li class="nav-item">
-                      <button type="button" class="btn btn-light">
+                      <button type="button" class="btn btn-light btn-md button">
                           <a class="nav-link" href="{{ path('app_logout') }}">Logout</a>
                       </button>
                   </li>
@@ -24,4 +24,14 @@
           </ul>
       </div>
     </nav>
+{% endblock %}
+
+{% block footer %}
+    <footer class="page-footer font-small blue" id="footer">
+
+        <div class="footer-copyright text-center py-3">© 2020 Copyright:
+          <a href="https://bipolab.eu"> Bipolab.eu</a>
+        </div>
+  
+    </footer>
 {% endblock %}
