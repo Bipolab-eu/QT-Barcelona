@@ -41,6 +41,8 @@ Then access the application in your browser at the given URL (<https://localhost
 
 If you don't have the Symfony binary installed, run `php -S localhost:8000 -t public/` to use the built-in PHP web server or [configure a web server][3] like Nginx or Apache to run the application.
 
+To create the admin you must do it manually in your database. It must have 'ROLE_ADMIN' role in order to work.
+
 Tests
 -----
 
