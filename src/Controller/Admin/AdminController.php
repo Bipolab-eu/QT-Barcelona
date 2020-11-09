@@ -41,7 +41,7 @@ class AdminController extends AbstractController
             'game_text' => $gameText,
             'title' => 'Text de capçalera',
             'title2' => 'Text informatiu',
-            'title3' => 'Instruccions de el joc'
+            'title3' => 'Instruccions dels jocs'
             ]
         );
     }
@@ -150,7 +150,7 @@ class AdminController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            $this->addFlash('success', 'post.updated_successfully');
+            $this->addFlash('success', 'Capçalera actualitzada correctament!');
 
             return $this->redirect('/admin');
         }
@@ -158,8 +158,7 @@ class AdminController extends AbstractController
         return $this->render('admin/content/edit.html.twig', [
             'cover_text' => $coverText,
             'form' => $form->createView(),
-            'title' => 'Text de capçalera',
-            'id' => $coverText->id
+            'title' => 'Text de capçalera'
             ]
         );
     }
@@ -178,7 +177,7 @@ class AdminController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            $this->addFlash('success', 'post.updated_successfully');
+            $this->addFlash('success', 'Text informatiu actualitzada correctament!');
 
             return $this->redirect('/admin');
         }
@@ -186,8 +185,7 @@ class AdminController extends AbstractController
         return $this->render('admin/content/edit.html.twig', [
             'description_text' => $descriptionText,
             'form' => $form->createView(),
-            'title' => 'Text informatiu',
-            'id' => $descriptionText->id
+            'title' => 'Text informatiu'
             ]
         );
     }
@@ -214,8 +212,7 @@ class AdminController extends AbstractController
         return $this->render('admin/content/edit.html.twig', [
             'game_text' => $gameText,
             'form' => $form->createView(),
-            'title' => 'Instruccions de el joc',
-            'id' => $gameText->id
+            'title' => 'Instruccions de el joc'
             ]
         );
     }

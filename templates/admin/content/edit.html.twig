@@ -12,17 +12,17 @@
 {% block sidebar %}
     {% if cover_text is defined %}
         <div class="section actions">
-            {{ include('cover_text/_delete_cover_text.html.twig', {id: id}, with_context = false) }}
+            {{ include('cover_text/_delete_cover_text.html.twig', {id: cover_text.id}, with_context = false) }}
         </div>
     
     {% elseif description_text is defined %}
         <div class="section actions">
-            {{ include('description_text/_delete_description_text.html.twig', {id: id}, with_context = false) }}
+            {{ include('description_text/_delete_description_text.html.twig', {id: description_text.id}, with_context = false) }}
         </div>
 
-    {% else %}
+    {% elseif game_text is defined %}
         <div class="section actions">
-            {{ include('game_text/_delete_game_text.html.twig', {id: id}, with_context = false) }}
+            {{ include('game_text/_delete_game_text.html.twig', {id: game_text.id}, with_context = false) }}
         </div>
     {% endif %}
 {% endblock %}
